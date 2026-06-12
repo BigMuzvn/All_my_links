@@ -14,6 +14,19 @@
 - Godson fournit les assets : dossier `assets/photos/` (photo + logo CTN) et `assets/icons/` (vraies icônes SVG des plateformes) créés avec un README d'instructions.
 - Prochaine étape : recap du design, spec dans `docs/superpowers/specs/`, puis plan d'implémentation.
 
+### 2026-06-12 — Task 1 complétée : `links.js` créée
+- Fichier `links.js` créé avec la config des liens Godson et CTN Mafia (8 + 5 liens) : objet global `CONFIG` consommé par `app.js` (Task 4).
+- Revues : un `module.exports` hors spec retiré (YAGNI), logo CTN renommé `ctn-mafia-logo.png` (chemin sans espaces), commentaire `label` ajouté.
+- Commits : `3de4ec2`, `a7dabd1`, `204f242`.
+
+### 2026-06-12 — Task 2 complétée : `index.html` structurée
+- Fichier `index.html` crée avec deux vues (Godson + CTN Mafia), hero plein écran, kanji en fond, nav de liens dynamique.
+- Tous les IDs requis présents et uniques : `view-godson`, `hero-photo`, `title-godson`, `links-godson`, `open-ctn`, `view-ctn`, `back-godson`, `ctn-logo`, `title-ctn`, `links-ctn`.
+- Caractères japonais intacts : マフィアへようこそ (titre), マフィア (kanji-bg), 組 (bouton).
+- Commit : `efc15f2` (feat: structure HTML des deux vues).
+- Revues : `src=""` vides retirés (requête parasite), `back-godson` renommé `back-ctn`, `aria-labelledby` sur la section CTN, flèches ←/→ en `aria-hidden` (commit `7b3235d`, plan synchronisé).
+- Prochaines étapes : Task 3 (`styles.css`) et Task 4 (`app.js`).
+
 ## Messages pour Claude Code
 
 (vide pour l'instant)
