@@ -253,7 +253,7 @@ body {
 .kanji-bg {
   position: absolute;
   right: 8px;
-  top: 58vh;
+  top: max(380px, min(58vh, 560px)); /* suit le min/max-height du héro */
   font-family: 'Noto Sans JP', sans-serif;
   font-size: 100px;
   font-weight: 700;
@@ -321,7 +321,7 @@ body {
   color: #fff;
   box-shadow: 0 4px 18px rgba(220,38,38,.35);
 }
-.btn-ctn:hover { background: linear-gradient(90deg, #991b1b, #ef4444); transform: translateY(-2px); }
+.btn-ctn:hover { background: linear-gradient(90deg, #991b1b, #c72020); transform: translateY(-2px); }
 .btn-ctn .jp { font-family: 'Noto Sans JP', sans-serif; margin-left: 8px; }
 
 /* ===== Vue CTN Mafia ===== */
