@@ -11,7 +11,7 @@ Page web statique type Linktree / fanbase.to pour Godson : photo, identité, lie
 ## Contenu
 
 ### Vue principale — Godson
-- **Photo héro** : `assets/photos/godson.jpg`, plein écran en haut (~55-58 % de la hauteur), fondue dans le fond noir via dégradé.
+- **Photo héro** : `assets/photos/muzvnpic.jpeg`, plein écran en haut (~55-58 % de la hauteur), fondue dans le fond noir via dégradé.
 - **Nom** (par-dessus le bas de la photo) : « Godson **aka** Muzvn » — « aka » en rouge.
 - **Bio** : « マフィアへようこそ » en rouge, sous le nom.
 - **Liens**, dans cet ordre :
@@ -26,7 +26,7 @@ Page web statique type Linktree / fanbase.to pour Godson : photo, identité, lie
 - **Bouton « CTN MAFIA 組 → »** : bouton rouge dégradé, ouvre la vue CTN Mafia.
 
 ### Vue secondaire — CTN Mafia (label)
-- **Header** : logo `assets/photos/ctn-mafia.png` centré avec halo rouge, fondu dans le noir ; nom « CTN MAFIA » ; sous-titre « Label · マフィアへようこそ ».
+- **Header** : logo `assets/photos/CTN Mafia logo 2.0N.png` centré avec halo rouge, fondu dans le noir ; nom « CTN MAFIA » ; sous-titre « Label · マフィアへようこそ ».
 - **Bouton retour** flottant en haut à gauche (pilule semi-transparente « ← Retour »).
 - **Liens**, dans cet ordre : Instagram, Email, TikTok, YouTube, Facebook.
 
@@ -39,7 +39,7 @@ Les URLs réelles seront fournies par Godson ; en attendant, placeholders `#` cl
 - **Filigrane** : kanji « マフィア » vertical, rouge très transparent, sous le héro à droite.
 - **Boutons-liens** : rectangles arrondis (~16px), hauteur ≥ 52px, badge icône de plateforme à gauche (38×38, couleur de marque), libellé, flèche ronde à droite. Ombre douce, hover/active animés (translation/scale).
 - **Animations** : fade-up à l'apparition de chaque vue, transitions 150ms sur les boutons. Respecter `prefers-reduced-motion` (désactiver les animations).
-- **Icônes** : vrais logos fournis par Godson dans `assets/icons/` (SVG de préférence — voir `assets/README.md`).
+- **Icônes** : vrais logos fournis par Godson dans `assets/icons/` — SVG monochromes (style simpleicons) : `instagram.svg`, `gmail.svg` (pour Email), `snapchat.svg`, `whatsapp.svg`, `x.svg`, `youtube.svg`, `tiktok.svg`, `facebook.svg`. Chaque badge prend la **couleur logique de la marque** (Instagram dégradé, Gmail rouge `#EA4335`, Snapchat jaune `#FFFC00` avec icône noire, WhatsApp vert `#25D366`, X noir, YouTube rouge `#FF0000`, TikTok noir, Facebook bleu `#1877F2`), l'icône étant recolorée en blanc (ou noir sur fond clair) via filtre CSS sur `<img>` (`brightness(0)` ± `invert(1)`) — technique compatible `file://` qui permet aussi le fallback « lettre » via `onerror`. Les couleurs sont définies dans `links.js`.
 
 ## Architecture technique
 
