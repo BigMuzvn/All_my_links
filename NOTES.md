@@ -27,6 +27,14 @@
 - Revues : `src=""` vides retirés (requête parasite), `back-godson` renommé `back-ctn`, `aria-labelledby` sur la section CTN, flèches ←/→ en `aria-hidden` (commit `7b3235d`, plan synchronisé).
 - Prochaines étapes : Task 3 (`styles.css`) et Task 4 (`app.js`).
 
+### 2026-06-12 — Tasks 3 & 4 complétées : la page est fonctionnelle
+- `styles.css` (210 lignes) : palette Mix A×B, héro fondu, badges couleurs de marque (+ bordure subtile pour X/TikTok), animations, `prefers-reduced-motion`, cibles ≥ 44px. Commit `f80130c`.
+- Revue T3 : kanji clampé au héro (`max/min` au lieu de `58vh` sec), contraste AA du hover CTN corrigé (`#c72020`). Commit `b73dd5e`.
+- `app.js` (78 lignes) : rendu des 13 boutons depuis `CONFIG`, bascule de vues avec focus, fallbacks icône→lettre et photo→dégradé. Commit `1cc6c6e`.
+- Revue T4 : approuvée ; refs DOM consolidées + `focus({ preventScroll: true })`. Commit `e1c760b`.
+- Toutes les tâches passent par : implémentation (sous-agent) → revue conformité spec → revue qualité → correctifs. Plan tenu en sync à chaque déviation.
+- **Checkpoint en cours : validation visuelle par Godson, puis T5 (vraies URLs + checklist finale).**
+
 ## Messages pour Claude Code
 
 (vide pour l'instant)
