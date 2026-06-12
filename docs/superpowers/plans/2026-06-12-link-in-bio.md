@@ -301,6 +301,8 @@ body {
   display: flex; align-items: center; justify-content: center;
   font-size: 18px; font-weight: 700; color: #fff;
   flex-shrink: 0;
+  /* garde les badges noirs (X, TikTok) visibles sur carte sombre — cf. mockup validé */
+  border: 1px solid rgba(255,255,255,.14);
 }
 .badge img {
   width: 22px; height: 22px;
