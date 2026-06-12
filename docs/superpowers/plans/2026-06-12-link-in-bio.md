@@ -516,6 +516,8 @@ Demander à Godson d'ouvrir `index.html` (idéalement aussi sur son téléphone 
 
 ---
 
+> **Amendement (checkpoint T4, validé par Godson) :** la vue CTN Mafia utilise désormais le même héro plein écran fondu que la vue Godson (`<header class="hero hero-ctn">`, logo en `<img>` plein cadre, textes dans `.identity`). Les blocs HTML/CSS des Tâches 2-3 ci-dessus reflètent l'état AVANT cet amendement ; les fichiers livrés font foi.
+
 ### Task 5: Finitions accessibilité/perf + URLs réelles + journal
 
 **Files:**

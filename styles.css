@@ -152,35 +152,22 @@ body {
 .btn-ctn:hover { background: linear-gradient(90deg, #991b1b, #c72020); transform: translateY(-2px); }
 .btn-ctn .jp { font-family: 'Noto Sans JP', sans-serif; margin-left: 8px; }
 
-/* ===== Vue CTN Mafia ===== */
+/* ===== Vue CTN Mafia : même héro fondu que la vue Godson ===== */
 .hero-ctn {
-  position: relative;
-  width: 100%;
-  height: 42vh;
-  min-height: 300px;
-  max-height: 420px;
-  overflow: hidden;
+  /* fallback si le logo manque : lueur rouge sur fond sombre */
   background:
     radial-gradient(circle at 50% 30%, rgba(220,38,38,.22) 0%, rgba(14,14,16,0) 60%),
     #111113;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
 }
-.hero-ctn .fade {
-  position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(14,14,16,0) 55%, var(--bg) 98%);
-  pointer-events: none;
+.hero-ctn img { object-position: center; }
+.ctn-name { letter-spacing: 6px; }
+.ctn-sub {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-shadow: 0 1px 10px rgba(0,0,0,.8);
 }
-.logo-ctn {
-  width: 110px; height: 110px;
-  object-fit: contain;
-  border-radius: 26px;
-  background: linear-gradient(135deg, #18181b, #060607);
-  border: 2.5px solid var(--red);
-  box-shadow: 0 0 36px rgba(220,38,38,.35);
-}
-.ctn-name { margin-top: 16px; font-size: 26px; font-weight: 800; letter-spacing: 6px; outline: none; }
-.ctn-sub { margin-top: 4px; color: var(--muted); font-size: 13px; letter-spacing: 1px; }
 
 .back {
   position: absolute;
