@@ -6,6 +6,7 @@
 //   - Les autres → l'URL complète de ton profil
 // Pour ajouter/retirer/réordonner un lien : édite simplement la liste.
 // color = fond du badge (couleur officielle de la marque)
+// label = texte affiché sur le bouton
 // dark: true = icône noire (pour les fonds clairs comme Snapchat)
 // ============================================================
 
@@ -32,7 +33,7 @@ const CONFIG = {
   ctn: {
     name: "CTN MAFIA",
     sub: "Label · マフィアへようこそ",
-    logo: "assets/photos/CTN Mafia logo 2.0N.png",
+    logo: "assets/photos/ctn-mafia-logo.png",
     links: [
       { label: "Instagram", url: "#", icon: "assets/icons/instagram.svg", color: IG_GRADIENT, dark: false },
       { label: "Email",     url: "#", icon: "assets/icons/gmail.svg",     color: "#EA4335",   dark: false },
