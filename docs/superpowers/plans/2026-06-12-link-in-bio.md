@@ -447,16 +447,19 @@ function createLinkButton(link) {
 
 function renderProfile() {
   const g = CONFIG.godson;
-  document.getElementById("hero-photo").src = g.photo;
+  const heroPhoto = document.getElementById("hero-photo");
+  heroPhoto.src = g.photo;
   // Spec : photo manquante → le héro garde son dégradé sombre.
-  document.getElementById("hero-photo").addEventListener("error", (e) => e.target.remove());
+  // (l'événement error est asynchrone : le listener attaché juste après src le capte toujours)
+  heroPhoto.addEventListener("error", (e) => e.target.remove());
   document.getElementById("title-godson").innerHTML =
     `${g.name} <span class="aka">aka</span> ${g.aka}`;
   document.querySelector("#view-godson .bio").textContent = g.bio;
 
   const c = CONFIG.ctn;
-  document.getElementById("ctn-logo").src = c.logo;
-  document.getElementById("ctn-logo").addEventListener("error", (e) => e.target.remove());
+  const ctnLogo = document.getElementById("ctn-logo");
+  ctnLogo.src = c.logo;
+  ctnLogo.addEventListener("error", (e) => e.target.remove());
   document.getElementById("title-ctn").textContent = c.name;
   document.querySelector("#view-ctn .ctn-sub").textContent = c.sub;
 
@@ -473,7 +476,8 @@ function showView(which) {
   ctn.classList.toggle("hidden", which !== "ctn");
   window.scrollTo({ top: 0 });
   // Accessibilité (spec) : focus sur le titre de la vue affichée.
-  document.getElementById(which === "godson" ? "title-godson" : "title-ctn").focus();
+  document.getElementById(which === "godson" ? "title-godson" : "title-ctn")
+    .focus({ preventScroll: true });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
