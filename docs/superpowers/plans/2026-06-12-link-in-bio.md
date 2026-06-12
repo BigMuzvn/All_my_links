@@ -107,7 +107,7 @@ git add links.js && git commit -m "feat: config des liens (Godson + CTN Mafia)"
     <!-- ===== VUE GODSON ===== -->
     <main class="view" id="view-godson">
       <header class="hero">
-        <img id="hero-photo" src="" alt="Photo de Godson">
+        <img id="hero-photo" alt="Photo de Godson">
         <div class="fade" aria-hidden="true"></div>
         <div class="identity">
           <h1 class="name" id="title-godson" tabindex="-1"></h1>
@@ -118,16 +118,16 @@ git add links.js && git commit -m "feat: config des liens (Godson + CTN Mafia)"
 
       <div class="content">
         <nav class="links" id="links-godson" aria-label="Liens de Godson"></nav>
-        <button class="btn btn-ctn" id="open-ctn">CTN MAFIA <span class="jp" lang="ja">組</span> →</button>
+        <button class="btn btn-ctn" id="open-ctn">CTN MAFIA <span class="jp" lang="ja">組</span> <span aria-hidden="true">→</span></button>
         <p class="footer">© 2026 Godson · Muzvn</p>
       </div>
     </main>
 
     <!-- ===== VUE CTN MAFIA ===== -->
-    <section class="view hidden" id="view-ctn">
+    <section class="view hidden" id="view-ctn" aria-labelledby="title-ctn">
       <header class="hero-ctn">
-        <button class="back" id="back-godson">← Retour</button>
-        <img class="logo-ctn" id="ctn-logo" src="" alt="Logo CTN Mafia">
+        <button class="back" id="back-ctn"><span aria-hidden="true">←</span> Retour</button>
+        <img class="logo-ctn" id="ctn-logo" alt="Logo CTN Mafia">
         <h2 class="ctn-name" id="title-ctn" tabindex="-1"></h2>
         <p class="ctn-sub"></p>
         <div class="fade" aria-hidden="true"></div>
@@ -253,7 +253,7 @@ body {
 .kanji-bg {
   position: absolute;
   right: 8px;
-  top: 58vh;
+  top: max(380px, min(58vh, 560px)); /* suit le min/max-height du héro */
   font-family: 'Noto Sans JP', sans-serif;
   font-size: 100px;
   font-weight: 700;
@@ -301,6 +301,8 @@ body {
   display: flex; align-items: center; justify-content: center;
   font-size: 18px; font-weight: 700; color: #fff;
   flex-shrink: 0;
+  /* garde les badges noirs (X, TikTok) visibles sur carte sombre — cf. mockup validé */
+  border: 1px solid rgba(255,255,255,.14);
 }
 .badge img {
   width: 22px; height: 22px;
@@ -319,7 +321,7 @@ body {
   color: #fff;
   box-shadow: 0 4px 18px rgba(220,38,38,.35);
 }
-.btn-ctn:hover { background: linear-gradient(90deg, #991b1b, #ef4444); transform: translateY(-2px); }
+.btn-ctn:hover { background: linear-gradient(90deg, #991b1b, #c72020); transform: translateY(-2px); }
 .btn-ctn .jp { font-family: 'Noto Sans JP', sans-serif; margin-left: 8px; }
 
 /* ===== Vue CTN Mafia ===== */
@@ -445,16 +447,19 @@ function createLinkButton(link) {
 
 function renderProfile() {
   const g = CONFIG.godson;
-  document.getElementById("hero-photo").src = g.photo;
+  const heroPhoto = document.getElementById("hero-photo");
+  heroPhoto.src = g.photo;
   // Spec : photo manquante → le héro garde son dégradé sombre.
-  document.getElementById("hero-photo").addEventListener("error", (e) => e.target.remove());
+  // (l'événement error est asynchrone : le listener attaché juste après src le capte toujours)
+  heroPhoto.addEventListener("error", (e) => e.target.remove());
   document.getElementById("title-godson").innerHTML =
     `${g.name} <span class="aka">aka</span> ${g.aka}`;
   document.querySelector("#view-godson .bio").textContent = g.bio;
 
   const c = CONFIG.ctn;
-  document.getElementById("ctn-logo").src = c.logo;
-  document.getElementById("ctn-logo").addEventListener("error", (e) => e.target.remove());
+  const ctnLogo = document.getElementById("ctn-logo");
+  ctnLogo.src = c.logo;
+  ctnLogo.addEventListener("error", (e) => e.target.remove());
   document.getElementById("title-ctn").textContent = c.name;
   document.querySelector("#view-ctn .ctn-sub").textContent = c.sub;
 
@@ -471,13 +476,14 @@ function showView(which) {
   ctn.classList.toggle("hidden", which !== "ctn");
   window.scrollTo({ top: 0 });
   // Accessibilité (spec) : focus sur le titre de la vue affichée.
-  document.getElementById(which === "godson" ? "title-godson" : "title-ctn").focus();
+  document.getElementById(which === "godson" ? "title-godson" : "title-ctn")
+    .focus({ preventScroll: true });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   renderProfile();
   document.getElementById("open-ctn").addEventListener("click", () => showView("ctn"));
-  document.getElementById("back-godson").addEventListener("click", () => showView("godson"));
+  document.getElementById("back-ctn").addEventListener("click", () => showView("godson"));
 });
 ```
 
@@ -509,6 +515,8 @@ git add app.js && git commit -m "feat: rendu des liens, bascule de vues, fallbac
 Demander à Godson d'ouvrir `index.html` (idéalement aussi sur son téléphone via le réseau local ou en l'envoyant) et de confirmer le rendu avant la suite.
 
 ---
+
+> **Amendement (checkpoint T4, validé par Godson) :** la vue CTN Mafia utilise désormais le même héro plein écran fondu que la vue Godson (`<header class="hero hero-ctn">`, logo en `<img>` plein cadre, textes dans `.identity`). Les blocs HTML/CSS des Tâches 2-3 ci-dessus reflètent l'état AVANT cet amendement ; les fichiers livrés font foi.
 
 ### Task 5: Finitions accessibilité/perf + URLs réelles + journal
 

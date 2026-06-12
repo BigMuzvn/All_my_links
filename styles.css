@@ -1,0 +1,197 @@
+/* ===== Palette (spec : Mix A×B) ===== */
+:root {
+  --bg: #0e0e10;
+  --card: #1c1c1f;
+  --card-hover: #26262a;
+  --text: #f5f5f7;
+  --muted: #98989d;
+  --red: #dc2626;
+  --red-dark: #7f1d1d;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', 'Noto Sans JP', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.phone {
+  width: 100%;
+  max-width: 430px;
+  position: relative;
+}
+
+/* ===== Vues & animation d'entrée ===== */
+.view { animation: fadeUp .45s ease both; }
+.view.hidden { display: none; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Héro : photo fondue ===== */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 58vh;
+  min-height: 380px;
+  max-height: 560px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #1a1a1d, var(--bg)); /* visible si la photo manque */
+}
+.hero img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.hero .fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+    rgba(14,14,16,0) 0%,
+    rgba(14,14,16,0) 45%,
+    rgba(14,14,16,.55) 72%,
+    var(--bg) 98%);
+}
+.hero .identity { position: absolute; left: 22px; right: 22px; bottom: 10px; }
+.name {
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: .3px;
+  text-shadow: 0 2px 14px rgba(0,0,0,.7);
+  outline: none;
+}
+.name .aka { color: var(--red); font-weight: 600; font-size: 21px; }
+.bio {
+  margin-top: 4px;
+  font-family: 'Noto Sans JP', sans-serif;
+  color: var(--red);
+  font-size: 15px;
+  letter-spacing: 4px;
+  text-shadow: 0 1px 10px rgba(0,0,0,.8);
+}
+
+/* ===== Filigrane kanji ===== */
+.kanji-bg {
+  position: absolute;
+  right: 8px;
+  top: max(380px, min(58vh, 560px)); /* suit le min/max-height du héro */
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 100px;
+  font-weight: 700;
+  color: rgba(220, 38, 38, 0.05);
+  writing-mode: vertical-rl;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ===== Liste de liens ===== */
+.content { padding: 22px 22px 60px; position: relative; }
+.links { display: flex; flex-direction: column; gap: 12px; }
+
+.btn {
+  display: flex; align-items: center; gap: 14px;
+  width: 100%;
+  background: var(--card);
+  border: 1px solid #28282c;
+  border-radius: 16px;
+  padding: 13px 16px;
+  min-height: 56px;            /* spec : cibles tactiles ≥ 44px */
+  color: var(--text);
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 15px; font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0,0,0,.35);
+  transition: transform .15s ease, background .15s ease, border-color .15s ease;
+  cursor: pointer;
+}
+.btn:hover { background: var(--card-hover); border-color: #3a3a3e; transform: translateY(-2px); }
+.btn:active { transform: scale(.97); }
+.btn:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+.btn .label { flex: 1; text-align: left; }
+.btn .go {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: #2e2e33; color: #cfcfd4;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; flex-shrink: 0;
+}
+
+/* ===== Badges d'icônes (couleurs de marque) ===== */
+.badge {
+  width: 38px; height: 38px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 700; color: #fff;
+  flex-shrink: 0;
+  /* garde les badges noirs (X, TikTok) visibles sur carte sombre — cf. mockup validé */
+  border: 1px solid rgba(255,255,255,.14);
+}
+.badge img {
+  width: 22px; height: 22px;
+  filter: brightness(0) invert(1);   /* icône monochrome → blanche */
+}
+.badge.dark { color: #111; }
+.badge.dark img { filter: brightness(0); }  /* fond clair → icône noire */
+
+/* ===== Bouton CTN Mafia ===== */
+.btn-ctn {
+  margin-top: 22px;
+  background: linear-gradient(90deg, var(--red-dark), var(--red));
+  border: none;
+  justify-content: center;
+  font-weight: 700; letter-spacing: 2px;
+  color: #fff;
+  box-shadow: 0 4px 18px rgba(220,38,38,.35);
+}
+.btn-ctn:hover { background: linear-gradient(90deg, #991b1b, #c72020); transform: translateY(-2px); }
+.btn-ctn .jp { font-family: 'Noto Sans JP', sans-serif; margin-left: 8px; }
+
+/* ===== Vue CTN Mafia : même héro fondu que la vue Godson ===== */
+.hero-ctn {
+  /* fallback si le logo manque : lueur rouge sur fond sombre */
+  background:
+    radial-gradient(circle at 50% 30%, rgba(220,38,38,.22) 0%, rgba(14,14,16,0) 60%),
+    #111113;
+}
+.hero-ctn img { object-position: center; }
+.ctn-name { letter-spacing: 6px; }
+.ctn-sub {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-shadow: 0 1px 10px rgba(0,0,0,.8);
+}
+
+.back {
+  position: absolute;
+  top: 12px; left: 12px;
+  z-index: 5;
+  display: inline-flex; align-items: center; gap: 8px;
+  color: #d6d6db; font-size: 14px; font-weight: 600;
+  background: rgba(20,20,23,.65);
+  backdrop-filter: blur(6px);
+  border: 1px solid #2e2e33;
+  border-radius: 999px;
+  cursor: pointer;
+  padding: 10px 16px;
+  min-height: 44px;            /* spec : cible tactile ≥ 44px */
+  font-family: inherit;
+}
+.back:hover { color: #fff; background: rgba(40,40,45,.8); }
+.back:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+
+.footer { text-align: center; margin-top: 34px; color: #98989d; font-size: 12px; }
+
+/* ===== Accessibilité : animations désactivables (spec) ===== */
+@media (prefers-reduced-motion: reduce) {
+  .view { animation: none; }
+  .btn, .back { transition: none; }
+  .btn:hover, .btn:active, .btn-ctn:hover { transform: none; }
+}

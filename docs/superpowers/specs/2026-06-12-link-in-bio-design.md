@@ -26,7 +26,7 @@ Page web statique type Linktree / fanbase.to pour Godson : photo, identité, lie
 - **Bouton « CTN MAFIA 組 → »** : bouton rouge dégradé, ouvre la vue CTN Mafia.
 
 ### Vue secondaire — CTN Mafia (label)
-- **Header** : logo `assets/photos/CTN Mafia logo 2.0N.png` centré avec halo rouge, fondu dans le noir ; nom « CTN MAFIA » ; sous-titre « Label · マフィアへようこそ ».
+- **Header** : comme la vue Godson — logo `assets/photos/ctn-mafia-logo.png` en héro plein écran fondu dans le noir, nom « CTN MAFIA » et sous-titre « Label · マフィアへようこそ » par-dessus le bas du fondu (changement demandé par Godson au checkpoint T4 ; remplace le logo encadré centré).
 - **Bouton retour** flottant en haut à gauche (pilule semi-transparente « ← Retour »).
 - **Liens**, dans cet ordre : Instagram, Email, TikTok, YouTube, Facebook.
 
@@ -51,8 +51,8 @@ styles.css      — tout le style
 app.js          — rendu des liens depuis la config + bascule de vues
 links.js        — LA config à éditer (identité, bios, liens, chemins d'assets)
 assets/
-├── photos/     — godson.jpg, ctn-mafia.png
-└── icons/      — instagram.svg, email.svg, … (8 plateformes ; la vue CTN réutilise les mêmes icônes)
+├── photos/     — muzvnpic.jpeg, ctn-mafia-logo.png
+└── icons/      — instagram.svg, gmail.svg, … (8 plateformes ; la vue CTN réutilise les mêmes icônes)
 ```
 
 - **`links.js`** : un objet JS global clairement commenté (ex. `const CONFIG = { godson: { name, bio, links: [{ label, url, icon }] }, ctn: {…} }`). Choisi plutôt que `links.json` + `fetch` pour fonctionner aussi en ouvrant `index.html` en double-clic (pas de serveur requis).
