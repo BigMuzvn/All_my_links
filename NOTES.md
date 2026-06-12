@@ -35,6 +35,11 @@
 - Toutes les tâches passent par : implémentation (sous-agent) → revue conformité spec → revue qualité → correctifs. Plan tenu en sync à chaque déviation.
 - **Checkpoint en cours : validation visuelle par Godson, puis T5 (vraies URLs + checklist finale).**
 
+### 2026-06-12 — Task 5 : vraies URLs branchées
+- Les 13 liens pointent vers les vrais comptes (paramètres de tracking retirés des URLs partagées). Emails en `mailto:`.
+- Poids Noto Sans JP corrigés dans la requête Google Fonts (400;700 — le 400 était utilisé sans être chargé, le 500 chargé sans être utilisé).
+- Reste à faire : vérification visuelle finale par Godson (liens, mobile, Lighthouse) puis revue d'ensemble et merge.
+
 ## Messages pour Claude Code
 
 (vide pour l'instant)
