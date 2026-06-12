@@ -107,7 +107,7 @@ git add links.js && git commit -m "feat: config des liens (Godson + CTN Mafia)"
     <!-- ===== VUE GODSON ===== -->
     <main class="view" id="view-godson">
       <header class="hero">
-        <img id="hero-photo" src="" alt="Photo de Godson">
+        <img id="hero-photo" alt="Photo de Godson">
         <div class="fade" aria-hidden="true"></div>
         <div class="identity">
           <h1 class="name" id="title-godson" tabindex="-1"></h1>
@@ -118,16 +118,16 @@ git add links.js && git commit -m "feat: config des liens (Godson + CTN Mafia)"
 
       <div class="content">
         <nav class="links" id="links-godson" aria-label="Liens de Godson"></nav>
-        <button class="btn btn-ctn" id="open-ctn">CTN MAFIA <span class="jp" lang="ja">組</span> →</button>
+        <button class="btn btn-ctn" id="open-ctn">CTN MAFIA <span class="jp" lang="ja">組</span> <span aria-hidden="true">→</span></button>
         <p class="footer">© 2026 Godson · Muzvn</p>
       </div>
     </main>
 
     <!-- ===== VUE CTN MAFIA ===== -->
-    <section class="view hidden" id="view-ctn">
+    <section class="view hidden" id="view-ctn" aria-labelledby="title-ctn">
       <header class="hero-ctn">
-        <button class="back" id="back-godson">← Retour</button>
-        <img class="logo-ctn" id="ctn-logo" src="" alt="Logo CTN Mafia">
+        <button class="back" id="back-ctn"><span aria-hidden="true">←</span> Retour</button>
+        <img class="logo-ctn" id="ctn-logo" alt="Logo CTN Mafia">
         <h2 class="ctn-name" id="title-ctn" tabindex="-1"></h2>
         <p class="ctn-sub"></p>
         <div class="fade" aria-hidden="true"></div>
@@ -477,7 +477,7 @@ function showView(which) {
 document.addEventListener("DOMContentLoaded", () => {
   renderProfile();
   document.getElementById("open-ctn").addEventListener("click", () => showView("ctn"));
-  document.getElementById("back-godson").addEventListener("click", () => showView("godson"));
+  document.getElementById("back-ctn").addEventListener("click", () => showView("godson"));
 });
 ```
 
