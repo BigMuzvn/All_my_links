@@ -40,6 +40,13 @@
 - Poids Noto Sans JP corrigés dans la requête Google Fonts (400;700 — le 400 était utilisé sans être chargé, le 500 chargé sans être utilisé).
 - Reste à faire : vérification visuelle finale par Godson (liens, mobile, Lighthouse) puis revue d'ensemble et merge.
 
+### 2026-06-12 — Projet clôturé : page en ligne 🎉
+- Revue finale d'ensemble : ✅ prête à merger (couverture spec complète, cohérence inter-fichiers, contrastes AA vérifiés numériquement).
+- Mergé dans `main` (commit `1e165ea`), branche `feature/link-in-bio` supprimée.
+- Poussé sur GitHub : dépôt créé `link_in_bio_personaliser`, renommé ensuite par Godson en **`All_my_links`** → https://github.com/BigMuzvn/All_my_links
+- **GitHub Pages actif : https://bigmuzvn.github.io/All_my_links/** — vérifié en ligne (titre, bio japonaise, bouton CTN MAFIA présents). Godson confirme tout fonctionnel.
+- Pour modifier les liens plus tard : éditer `links.js` puis `git push` — la page se met à jour automatiquement.
+
 ## Messages pour Claude Code
 
 (vide pour l'instant)
