@@ -26,7 +26,7 @@ Page web statique type Linktree / fanbase.to pour Godson : photo, identité, lie
 - **Bouton « CTN MAFIA 組 → »** : bouton rouge dégradé, ouvre la vue CTN Mafia.
 
 ### Vue secondaire — CTN Mafia (label)
-- **Header** : logo `assets/photos/CTN Mafia logo 2.0N.png` centré avec halo rouge, fondu dans le noir ; nom « CTN MAFIA » ; sous-titre « Label · マフィアへようこそ ».
+- **Header** : logo `assets/photos/ctn-mafia-logo.png` centré avec halo rouge, fondu dans le noir ; nom « CTN MAFIA » ; sous-titre « Label · マフィアへようこそ ».
 - **Bouton retour** flottant en haut à gauche (pilule semi-transparente « ← Retour »).
 - **Liens**, dans cet ordre : Instagram, Email, TikTok, YouTube, Facebook.
 
