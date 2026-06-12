@@ -51,8 +51,8 @@ styles.css      — tout le style
 app.js          — rendu des liens depuis la config + bascule de vues
 links.js        — LA config à éditer (identité, bios, liens, chemins d'assets)
 assets/
-├── photos/     — godson.jpg, ctn-mafia.png
-└── icons/      — instagram.svg, email.svg, … (8 plateformes ; la vue CTN réutilise les mêmes icônes)
+├── photos/     — muzvnpic.jpeg, ctn-mafia-logo.png
+└── icons/      — instagram.svg, gmail.svg, … (8 plateformes ; la vue CTN réutilise les mêmes icônes)
 ```
 
 - **`links.js`** : un objet JS global clairement commenté (ex. `const CONFIG = { godson: { name, bio, links: [{ label, url, icon }] }, ctn: {…} }`). Choisi plutôt que `links.json` + `fetch` pour fonctionner aussi en ouvrant `index.html` en double-clic (pas de serveur requis).
