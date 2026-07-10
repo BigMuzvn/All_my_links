@@ -21,7 +21,7 @@ const CONFIG = {
     photo: "assets/photos/muzvnpic.jpeg",
     links: [
       { label: "Instagram",         url: "https://www.instagram.com/iam_muzvn", icon: "assets/icons/instagram.svg", color: IG_GRADIENT, dark: false },
-      { label: "Email",             url: "mailto:lemayeprivate@gmail.com", icon: "assets/icons/gmail.svg",     color: "#EA4335",   dark: false },
+      { label: "Email",             url: "mailto:godsonmailperso@gmail.com", icon: "assets/icons/gmail.svg",     color: "#EA4335",   dark: false },
       { label: "Snapchat",          url: "https://snapchat.com/t/3DsfG0nL", icon: "assets/icons/snapchat.svg",  color: "#FFFC00",   dark: true  },
       { label: "WhatsApp",          url: "https://wa.me/2290155377463", icon: "assets/icons/whatsapp.svg",  color: "#25D366",   dark: false },
       { label: "X",                 url: "https://x.com/iammuzvn", icon: "assets/icons/x.svg",         color: "#000000",   dark: false },
