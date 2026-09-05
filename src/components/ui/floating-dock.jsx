@@ -10,6 +10,13 @@ import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from
 
 import { useRef, useState } from "react";
 
+// L'effet de survol (zoom + infobulle) n'a de sens qu'avec une souris sur
+// grand écran : sur mobile on ne survole pas avec le doigt. On l'active donc
+// uniquement au-delà du breakpoint md ET si le pointeur sait survoler.
+const hoverEnabled = () =>
+  typeof window !== "undefined" &&
+  window.matchMedia("(min-width: 768px) and (hover: hover)").matches;
+
 export const FloatingDock = ({
   items,
   className
@@ -17,10 +24,10 @@ export const FloatingDock = ({
   let mouseX = useMotionValue(Infinity);
   return (
     <motion.div
-      onMouseMove={(e) => mouseX.set(e.pageX)}
+      onMouseMove={(e) => hoverEnabled() && mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
       className={cn(
-        "mx-auto flex h-14 items-end gap-2 rounded-2xl bg-gray-50 px-3 pb-2.5 sm:h-16 sm:gap-4 sm:px-4 sm:pb-3 dark:bg-neutral-900",
+        "mx-auto flex h-14 items-end gap-3 rounded-2xl bg-gray-50 px-4 pb-2.5 sm:h-16 sm:gap-4 sm:px-4 sm:pb-3 dark:bg-neutral-900",
         className,
       )}
     >
@@ -86,7 +93,7 @@ function IconContainer({
       <motion.div
         ref={ref}
         style={{ width, height }}
-        onMouseEnter={() => setHovered(true)}
+        onMouseEnter={() => hoverEnabled() && setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         className="relative flex aspect-square items-center justify-center rounded-full bg-gray-200 dark:bg-neutral-800"
       >

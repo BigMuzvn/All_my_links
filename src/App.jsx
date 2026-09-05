@@ -3,6 +3,7 @@ import { SocialDock } from "./components/social-dock.jsx";
 import { NameMorph } from "./components/name-morph.jsx";
 import { LinksParticles } from "./components/links-particles.jsx";
 import { LinksGrid } from "./components/links-grid.jsx";
+import { FloatingDecor } from "./components/floating-decor.jsx";
 // import { ProjectsGrid } from "./components/projects-grid.jsx"; // Partie 3 : en pause, pas encore affichée.
 
 // Retour à une page plein écran sans défilement (décision de Godson) :
@@ -14,16 +15,20 @@ export default function App() {
         <CloudShaderDemo />
       </div>
 
+      <FloatingDecor />
+
       <SocialDock />
 
-      <main className="relative z-10 flex h-full w-full flex-col items-center overflow-hidden px-4 pb-6 pt-28 md:pt-32">
-        <div className="mt-4 mb-4">
+      <main className="relative z-10 flex h-full w-full flex-col items-center overflow-hidden px-4 pb-6 pt-28 md:pt-48 [@media(min-width:768px)_and_(max-height:750px)]:pt-32">
+        {/* Marges auto : le nom se centre dans l'espace libre du haut, et le
+            couple particules + liens reste ancré en bas, collé l'un à l'autre. */}
+        <div className="mt-auto mb-auto">
           <NameMorph />
         </div>
-        <div className="mb-2">
+        <div className="mt-auto mb-2">
           <LinksParticles />
         </div>
-        <div className="flex flex-1 shrink-0 items-center py-2">
+        <div className="flex shrink-0 items-center py-2">
           <LinksGrid />
         </div>
       </main>

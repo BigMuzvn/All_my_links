@@ -4,7 +4,7 @@ import { asset } from "@/utils/asset.js";
 // "MES LIENS" en particules interactives (repoussées au passage de la souris).
 export function LinksParticles() {
   return (
-    <div className="aspect-[4.2/1] w-[92vw] max-w-[700px] shrink-0 overflow-hidden">
+    <div className="aspect-[4.2/1] w-[92vw] max-w-[700px] shrink-0 overflow-hidden [@media(min-width:768px)_and_(max-height:750px)]:max-h-[17vh]">
       <InteractiveParticles
         src={asset("assets/particles-mes-liens.png")}
         background="transparent"
