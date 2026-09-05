@@ -47,6 +47,59 @@
 - **GitHub Pages actif : https://bigmuzvn.github.io/All_my_links/** — vérifié en ligne (titre, bio japonaise, bouton CTN MAFIA présents). Godson confirme tout fonctionnel.
 - Pour modifier les liens plus tard : éditer `links.js` puis `git push` — la page se met à jour automatiquement.
 
+### 2026-09-04 — Deux tentatives de refonte visuelle, puis pivot vers React
+- **Tentative 1** : Godson fournit un mockup "Muzvn. Développeur & créateur" (rochers 3D, verre, anneaux néon, glassmorphism). Implémentée avec visuels générés par IA (Higgsfield) intégrés en `mix-blend-mode: screen`, toggle clair/sombre, badges à anneau néon par marque. **Jugée trop chargée par Godson à la vue du rendu réel** — abandonnée et revert complet (`git checkout`) avant tout commit.
+- **Tentative 2** : version simplifiée inspirée de deux autres références (avatar cerclé + halo doux, tuiles d'icônes pleine couleur, cartes titre/description, flèche neutre). Toujours en HTML/CSS/JS vanilla. Fonctionnelle et jugée correcte, mais **Godson décide finalement de ne pas se contenter d'un résultat "par flemme"** et veut une direction 100% originale, construite à la main avec lui section par section — abandon avant commit également.
+- **Décision finale** : passage à **Vite + React**, avec Tailwind CSS + Framer Motion comme socle, et des composants Aceternity UI copiés/adaptés au fil du build (ce ne sont pas des packages npm mais des snippets à intégrer un par un). Le contenu de base (13 liens Godson + CTN Mafia) reste, mais la mise en forme est repensée de zéro ; d'autres liens/sections pourront s'ajouter en cours de route.
+- Ce choix va à l'encontre du YAGNI initial du `CLAUDE.md` (page statique suffisante) — décision explicite et assumée par Godson, qui veut un résultat "hors du commun", pas un template. `CLAUDE.md` mis à jour en conséquence.
+- Godson va construire le design pas à pas avec des croquis, plutôt que de valider un mockup figé en amont — donc pas de spec écrite formelle, on avance section par section.
+- **Socle technique posé** (aucun style pour l'instant, juste la plomberie) :
+  - Scaffold Vite + React (JS) à la racine, migration de `links.js` en module ES (`src/data/links.js`), assets déplacés vers `public/assets/` (servis via un helper `asset()` qui préfixe avec `import.meta.env.BASE_URL`, nécessaire car le site vit sous `/All_my_links/`).
+  - Ancien site statique (`index.html`/`app.js`/`styles.css`/`links.js` à la racine) supprimé — récupérable dans l'historique git si besoin.
+  - `npm run build` vérifié en local (build + preview + capture Playwright) : aucune erreur console, tous les liens et l'avatar s'affichent.
+  - Déploiement : `.github/workflows/deploy.yml` ajouté (build + déploie sur GitHub Pages à chaque push sur `main`). **Action requise côté Godson** : dans les paramètres GitHub du repo → Settings → Pages → Build and deployment → Source, sélectionner "GitHub Actions" (au lieu de "Deploy from a branch") pour que ce nouveau pipeline prenne le relais de l'ancien déploiement statique.
+- Découverte en cours de route : de nouvelles icônes (`github.png`, `portfolio.png`, `twitter.png`, etc.) étaient déjà présentes dans `assets/icons/` sans être utilisées dans la config — probablement ajoutées par Godson en prévision de futurs liens. Question posée à Godson, pas encore intégrées.
+- Prochaine étape : Godson apporte un croquis/une direction, on construit la première section ensemble.
+
+### 2026-09-04 — Première section : le fond animé (nuages Aceternity)
+- Godson fournit une image de référence (ciel animé, nuages qui défilent) + le snippet Aceternity `cloud-shader-demo` (WebGL brut, pas de Three.js).
+- Mise en place : alias `@/*` → `src/*` (vite.config.js + jsconfig.json), puis `npx shadcn@latest init --template vite` pour pouvoir installer des composants Aceternity via `npx shadcn add @aceternity/...`.
+- **Découverte en cours de route** : `shadcn init` a généré une config pensée pour Tailwind v4 (variables CSS + `@theme inline`), alors que le projet avait Tailwind v3 installé à l'étape précédente → erreurs `border-border does not exist`. Résolu en migrant vers **Tailwind CSS v4** (`@tailwindcss/postcss`, suppression de `tailwind.config.js` devenu inutile, ajout de l'`@import "tailwindcss"` et du bloc `@theme inline` manquants dans `src/index.css` — `shadcn init` ne les avait pas ajoutés car il s'attendait à un `index.css` déjà généré par un template Vite standard, pas le nôtre écrit à la main).
+- `CloudShader` branché en plein écran (`h-screen w-screen`, `overflow: hidden` sur html/body/#root) : correspond au rendu voulu par Godson, vérifié en dev et en build de production via capture Playwright (1440×900, aucune erreur console).
+- Contenu du profil (avatar, liens) temporairement retiré de `App.jsx` le temps de valider le fond seul — sera reposé par-dessus à la prochaine étape avec Godson.
+- Nouvelles icônes (`github.png`, `portfolio.png`, `twitter.png`, etc.) confirmées par Godson : ajoutées par lui-même, seront utilisées plus tard.
+- Prochaine étape : poser le profil (avatar, nom, liens) par-dessus le fond animé, section par section avec Godson.
+
+### 2026-09-04 — Deuxième section : la nav flottante (floating dock)
+- Ajout du composant Aceternity `@aceternity/floating-dock-demo` (`src/components/ui/floating-dock.jsx`), basé sur `motion` (le nouveau nom de `framer-motion` — `framer-motion` retiré du projet car jamais utilisé directement, pour éviter les deux libs en double).
+- Nav personnalisée dans `src/components/social-dock.jsx` : 5 liens (GitHub, X, Email, Instagram, Portfolio) avec les vraies icônes PNG de Godson (`public/assets/icons/github.png`, `twitter.png`, `email.png`, `insta.png`, `portfolio.png`), pas les icônes Tabler du snippet d'origine.
+- Liens : GitHub → `https://github.com/BigMuzvn`, X et Instagram réutilisent les URLs déjà présentes dans `src/data/links.js`, Email → `mailto:godsonmailperso@gmail.com`, Portfolio → lien mort (`#`) volontaire en attendant que Godson ait un portfolio en ligne.
+- Petit ajout au composant `floating-dock.jsx` (pas dans le snippet Aceternity d'origine) : support de `target`/`rel` par lien, pour que GitHub/X/Instagram s'ouvrent dans un nouvel onglet.
+- Positionnement : fixe, centré en haut, avec marge (`top-10`/`md:top-14`) pour ne pas coller au bord de l'écran, par-dessus le fond animé.
+- Vérifié en dev + build de production (aucune erreur console, capture Playwright avec et sans survol pour valider l'effet magnify).
+- Prochaine étape : Godson amène le prochain élément (avatar/section suivante) à poser sur le fond.
+
+### 2026-09-04 — Troisième section : le clavier qui tape (typing keyboard)
+- Composant hors Aceternity cette fois : registre communautaire **VengeanceUI** (`npx shadcn add <url raw GitHub>` — le CLI shadcn accepte n'importe quelle URL de registre, pas seulement `@aceternity/...`). Fichier généré : `src/components/ui/typing-keyboard.jsx`, pur CSS 3D (transforms), aucune dépendance supplémentaire.
+- Wrapper `src/components/intro-typing.jsx` : texte personnalisé "Salut, je suis Godson aka Muzvn." (au lieu du texte de démo par défaut), `scale=0.6` pour bien s'intégrer sous la nav.
+- Positionné en bas à gauche de la nav flottante (`fixed left-6 top-36` / `md:left-16 md:top-40`), avec un espacement qui laisse clairement respirer les deux éléments.
+- Vérifié en dev + build de production (aucune erreur console, capture Playwright pendant l'animation de frappe).
+- Prochaine étape : Godson amène le prochain élément à intégrer.
+
+### 2026-09-05 — Scroll accepté, Partie 3 branchée, clavier remplacé par un morph text
+- Après plusieurs allers-retours à essayer de tout faire tenir dans un écran sans défilement (nav/clavier/particules/liens qui se marchaient dessus ou disparaissaient selon la taille de fenêtre), **Godson décide d'accepter le défilement de page**. Ça résout d'un coup tous les problèmes de place et permet d'agrandir confortablement chaque élément.
+- Nouveau comportement : le fond de nuages reste fixe (`position: fixed`, en arrière-plan), tout le reste défile par-dessus, la nav flottante reste fixe en haut (toujours accessible).
+- **Partie 3 ajoutée** : composant `@aceternity`... non — cette fois `staggered-grid` vient du registre communautaire **VengeanceUI** (comme `typing-keyboard` et `interactive-particles`). Grille de cartes animées au scroll (GSAP ScrollTrigger, fonctionne nativement avec le vrai scroll de la page, pas besoin de carte à défilement séparé comme envisagé initialement). Icônes génériques Github/Slack/Twitter du composant remplacées par les vraies icônes de marque (Instagram, TikTok, YouTube, Snapchat, WhatsApp, Facebook, X) ; 3 cartes interactives au centre (Instagram avec la vraie photo, CTN Mafia, TikTok). Dépendance manquante (`imagesloaded`) installée manuellement, `react-icons` retiré (plus utilisé après le remplacement des icônes).
+- **Clavier tapant retiré entièrement** (fichiers supprimés : `intro-typing.jsx`, `ui/typing-keyboard.jsx`) et remplacé par un composant **Morph Text** (VengeanceUI) : le nom de Godson défile en boucle avec un effet de flou/morphing — "Godson" → "Lemaye" → "Muzvn" — sous-texte `マフィアへようこそ` conservé pour la continuité de marque.
+- Nav repositionnée plus bas (`top-14`/`md:top-16`) pour que l'infobulle au survol (nom de chaque lien) ne soit plus coupée en haut d'écran.
+- Vérifié : build de prod OK, aucune erreur console, animation de la grille au scroll confirmée par capture d'écran séquencée, cycle du morph text confirmé sur plusieurs tours.
+- Toujours en attente : nettoyer l'espace vide en bas de la section Projets (probablement lié à l'`aspect-[1.1]` fixe du composant), et la fameuse passe mobile-first repoussée depuis le début.
+
+### 2026-09-05 — Passe mobile-first, Partie 3 mise en pause
+- Godson choisit de mettre la section Projets (staggered grid) en pause plutôt que de la retirer : commentée dans `App.jsx` (code intact), et retour à une page plein écran sans défilement comme avant, maintenant sans clavier (remplacé par le morph text la fois précédente).
+- **Passe mobile-first enfin faite** : les largeurs fixes en pixels (`w-[700px]` pour les particules, etc.) sont devenues relatives (`w-[92vw] max-w-[700px]`, `aspect-[4.2/1]` pour garder le bon ratio de l'image sans la couper), la police du nom a un plancher plus bas (`clamp(1.6rem, 9vw, 6rem)`), les pilules de liens ont une taille réduite sur petit écran. Vérifié sans erreur sur iPhone SE, iPhone 12, iPhone Pro Max et petit Android (aucun débordement horizontal, tout tient sans scroll).
+- **Bug trouvé sur la nav mobile** : le composant Aceternity `floating-dock` a un mode « replié » pensé pour une nav en bas d'écran (le menu s'ouvre vers le haut). Comme notre nav est en haut, le menu s'ouvrait hors-écran — un seul lien restait visible. Godson a tranché : plutôt que de repositionner un menu dépliant, **simplifier** en affichant tous les icônes en permanence (pas de repli), sur mobile comme sur desktop — plus simple et plus fiable. Composant simplifié en conséquence (retrait de la variante mobile et de la dépendance `@tabler/icons-react`, plus utilisée).
+
 ## Messages pour Claude Code
 
 (vide pour l'instant)
