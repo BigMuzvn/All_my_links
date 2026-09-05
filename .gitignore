@@ -4,3 +4,10 @@
 # Dépendances et build
 node_modules/
 dist/
+
+# graphify : on garde les livrables (graph.html, graph.json, GRAPH_REPORT.md),
+# pas l'état local (chemins absolus de la machine, cache, horodatages).
+graphify-out/.graphify_*
+graphify-out/cache/
+graphify-out/manifest.json
+graphify-out/cost.json
