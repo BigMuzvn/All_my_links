@@ -1,2 +1,6 @@
 # Sessions de brainstorming du compagnon visuel (Superpowers)
 .superpowers/
+
+# Dépendances et build
+node_modules/
+dist/
