@@ -27,7 +27,7 @@ export const FloatingDock = ({
       onMouseMove={(e) => hoverEnabled() && mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
       className={cn(
-        "mx-auto flex h-14 items-end gap-3 rounded-2xl bg-gray-50 px-4 pb-2.5 sm:h-16 sm:gap-4 sm:px-4 sm:pb-3 dark:bg-neutral-900",
+        "mx-auto flex h-16 items-center gap-2 rounded-[1.35rem] border border-white/60 bg-gray-50/95 px-2.5 py-2 shadow-lg shadow-sky-900/10 backdrop-blur-xl sm:gap-4 sm:px-4 dark:bg-neutral-900",
         className,
       )}
     >
@@ -54,14 +54,14 @@ function IconContainer({
     return val - bounds.x - bounds.width / 2;
   });
 
-  let widthTransform = useTransform(distance, [-150, 0, 150], [36, 80, 36]);
-  let heightTransform = useTransform(distance, [-150, 0, 150], [36, 80, 36]);
+  let widthTransform = useTransform(distance, [-150, 0, 150], [44, 80, 44]);
+  let heightTransform = useTransform(distance, [-150, 0, 150], [44, 80, 44]);
 
-  let widthTransformIcon = useTransform(distance, [-150, 0, 150], [18, 40, 18]);
+  let widthTransformIcon = useTransform(distance, [-150, 0, 150], [20, 40, 20]);
   let heightTransformIcon = useTransform(
     distance,
     [-150, 0, 150],
-    [18, 40, 18],
+    [20, 40, 20],
   );
 
   let width = useSpring(widthTransform, {
@@ -89,7 +89,13 @@ function IconContainer({
   const [hovered, setHovered] = useState(false);
 
   return (
-    <a href={href} target={target} rel={rel}>
+    <a
+      href={href}
+      target={target}
+      rel={rel}
+      aria-label={title}
+      className="rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900"
+    >
       <motion.div
         ref={ref}
         style={{ width, height }}

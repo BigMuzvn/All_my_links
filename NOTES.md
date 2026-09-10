@@ -2,6 +2,15 @@
 
 ## Journal
 
+### 2026-09-10 — Refonte de l’adaptation mobile
+- Audit visuel réel en émulation stricte sur 320×568, 375×667, 390×844, 430×932 et 667×375 : aucun débordement horizontal ni erreur d’exécution.
+- Toutes les cibles tactiles (dock et liens) font désormais au moins 44×44 px ; focus clavier et retour visuel au toucher ajoutés.
+- Le plein écran repose maintenant sur `dvh`/`svh`, respecte les safe areas iOS et autorise un scroll vertical de secours sur les écrans trop courts ou en paysage.
+- Sur 320–340 px, les 8 liens passent dans une grille stable de 2 colonnes et « YouTube — Musique » devient simplement « YouTube » pour éviter tout débordement.
+- Optimisation mobile des deux effets WebGL : DPR du fond plafonné à 1,25 et échantillonnage des particules plafonné à 420 px ; qualité visuelle préservée avec moins de charge GPU.
+- Accessibilité : vrai titre sémantique « Mes liens », libellés du dock et fallback statique du morphing avec `prefers-reduced-motion`.
+- Build Vite validé après les changements. Les avertissements existants de résolution des variantes Geist restent non bloquants.
+
 ### 2026-06-12 — Démarrage du brainstorming
 - Lecture du CLAUDE.md : page link-in-bio mobile-first, HTML/CSS/JS statique privilégié (YAGNI), liens facilement modifiables, accessibilité (contrastes, cibles tactiles ≥ 44px).
 - Plugin Superpowers installé et chargé ; skill `brainstorming` invoquée avant tout code, comme demandé.

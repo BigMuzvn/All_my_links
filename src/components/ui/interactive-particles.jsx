@@ -313,7 +313,10 @@ export function InteractiveParticles({
       // One kept pixel becomes one particle. The full-res texture is still
       // sampled with normalised UVs, so color detail is preserved.
       const longest = Math.max(image.width, image.height);
-      const scaleDown = longest > maxDimension ? maxDimension / longest : 1;
+      const samplingLimit = window.matchMedia("(max-width: 767px)").matches
+        ? Math.min(maxDimension, 420)
+        : maxDimension;
+      const scaleDown = longest > samplingLimit ? samplingLimit / longest : 1;
       imgWidth = Math.max(1, Math.round(image.width * scaleDown));
       imgHeight = Math.max(1, Math.round(image.height * scaleDown));
       const numPoints = imgWidth * imgHeight;

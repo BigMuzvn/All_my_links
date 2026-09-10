@@ -61,7 +61,7 @@ export function MorphText({
         {/* word rotator */}
         <div
           className="morph-word-rotator relative flex items-center justify-center"
-          style={{ height: "1.2em", minWidth: "14ch" }}
+          style={{ height: "1.2em", minWidth: "min(14ch, 90vw)" }}
         >
           {words.map((word, i) => (
             <span
@@ -90,11 +90,11 @@ export function MorphText({
       {subtext && (
         <p
           className={cn(
-            "morph-subtext mt-8 uppercase tracking-[0.2em] text-[#888]",
+            "morph-subtext mt-4 uppercase tracking-[0.2em] text-[#888] sm:mt-6 md:mt-8",
             subtextClassName
           )}
           style={{
-            fontSize: "1.2rem",
+            fontSize: "clamp(0.9rem, 4vw, 1.2rem)",
             opacity: 0,
             animation: "morph-fade-up 1s ease-out 1s forwards",
             fontFamily,
@@ -137,6 +137,21 @@ export function MorphText({
         @keyframes morph-fade-up {
           from { opacity: 0; transform: translateY(20px); }
           to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .morph-word {
+            animation: none !important;
+          }
+          .morph-word:first-child {
+            opacity: 1 !important;
+            filter: none !important;
+            transform: translate(-50%, -50%) !important;
+          }
+          .morph-subtext {
+            animation: none !important;
+            opacity: 1 !important;
+          }
         }
       `}</style>
     </div>

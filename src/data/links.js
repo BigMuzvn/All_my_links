@@ -26,7 +26,7 @@ export const CONFIG = {
       { label: "Snapchat",          desc: "Behind the scenes au quotidien",  url: "https://snapchat.com/t/3DsfG0nL", icon: "assets/icons/snapchat.svg",  color: "#FFFC00",   dark: true  },
       { label: "WhatsApp",          desc: "Contact rapide & direct",         url: "https://wa.me/2290155377463", icon: "assets/icons/whatsapp.svg",  color: "#25D366",   dark: false },
       { label: "X",                 desc: "Mes pensées, en direct",          url: "https://x.com/iammuzvn", icon: "assets/icons/x.svg",         color: "#000000",   dark: false },
-      { label: "YouTube — Musique", desc: "Écoute mes sons",                 url: "https://youtube.com/@my2boug", icon: "assets/icons/youtube.svg",   color: "#FF0000",   dark: false },
+      { label: "YouTube — Musique", mobileLabel: "YouTube", desc: "Écoute mes sons", url: "https://youtube.com/@my2boug", icon: "assets/icons/youtube.svg", color: "#FF0000", dark: false },
       { label: "TikTok",            desc: "Clips & vidéos courtes",          url: "https://www.tiktok.com/@muzvn_off", icon: "assets/icons/tiktok.svg",    color: "#010101",   dark: false },
       { label: "Facebook",          desc: "Suis mon actu",                   url: "https://www.facebook.com/share/1b3NYxn1qv/", icon: "assets/icons/facebook.svg",  color: "#1877F2",   dark: false },
     ],

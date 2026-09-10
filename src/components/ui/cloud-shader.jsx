@@ -283,7 +283,10 @@ export const CloudShader = ({
     ).matches;
 
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      // Un DPR plafonné sur mobile garde le shader fluide sans différence
+      // visuelle perceptible sur ce fond diffus.
+      const dprLimit = window.matchMedia("(max-width: 767px)").matches ? 1.25 : 2;
+      const dpr = Math.min(window.devicePixelRatio || 1, dprLimit);
       const width = canvas.clientWidth;
       const height = canvas.clientHeight;
       const w = Math.max(1, Math.floor(width * dpr));
