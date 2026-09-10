@@ -48,7 +48,7 @@ const LINKS = [
 
 export function SocialDock() {
   return (
-    <div className="fixed inset-x-0 top-14 z-20 flex justify-center md:top-32 [@media(min-width:768px)_and_(max-height:750px)]:top-16">
+    <div className="fixed inset-x-0 top-[max(1rem,env(safe-area-inset-top))] z-20 flex justify-center md:top-32 [@media(min-width:768px)_and_(max-height:750px)]:top-16">
       <FloatingDock items={LINKS} />
     </div>
   );

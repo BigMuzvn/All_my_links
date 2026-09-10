@@ -6,12 +6,12 @@ import { LinksGrid } from "./components/links-grid.jsx";
 import { FloatingDecor } from "./components/floating-decor.jsx";
 // import { ProjectsGrid } from "./components/projects-grid.jsx"; // Partie 3 : en pause, pas encore affichée.
 
-// Retour à une page plein écran sans défilement (décision de Godson) :
-// tant que la Partie 3 (Projets) n'est pas affichée, pas besoin de scroll.
+// Composition plein écran. Sur mobile, un scroll de secours reste disponible
+// pour les écrans courts et le mode paysage afin de ne jamais couper les liens.
 export default function App() {
   return (
-    <div className="relative h-screen w-screen overflow-hidden">
-      <div className="absolute inset-0">
+    <div className="relative h-dvh min-h-svh w-full overflow-x-hidden overflow-y-auto overscroll-none md:h-screen md:overflow-hidden">
+      <div className="fixed inset-0">
         <CloudShaderDemo />
       </div>
 
@@ -19,16 +19,16 @@ export default function App() {
 
       <SocialDock />
 
-      <main className="relative z-10 flex h-full w-full flex-col items-center overflow-hidden px-4 pb-6 pt-28 md:pt-48 [@media(min-width:768px)_and_(max-height:750px)]:pt-32">
+      <main className="relative z-10 flex min-h-full w-full flex-col items-center px-3 pb-[max(1rem,env(safe-area-inset-bottom))] pt-28 sm:px-4 md:h-full md:overflow-hidden md:px-4 md:pb-6 md:pt-48 [@media(min-width:768px)_and_(max-height:750px)]:pt-32">
         {/* Marges auto : le nom se centre dans l'espace libre du haut, et le
             couple particules + liens reste ancré en bas, collé l'un à l'autre. */}
         <div className="mt-auto mb-auto">
           <NameMorph />
         </div>
-        <div className="mt-auto mb-2">
+        <div className="mt-auto mb-1 md:mb-2">
           <LinksParticles />
         </div>
-        <div className="flex shrink-0 items-center py-2">
+        <div className="flex shrink-0 items-center py-1.5 md:py-2">
           <LinksGrid />
         </div>
       </main>
